@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NSString+MorseCode.h"
 
 @interface RPLViewController : UIViewController
 

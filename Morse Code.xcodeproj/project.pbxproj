@@ -21,6 +21,7 @@
 		0F4AAA9D188DCC24000CFBAE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4AAA7F188DCC24000CFBAE /* UIKit.framework */; };
 		0F4AAAA5188DCC24000CFBAE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F4AAAA3188DCC24000CFBAE /* InfoPlist.strings */; };
 		0F4AAAA7188DCC24000CFBAE /* Morse_CodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4AAAA6188DCC24000CFBAE /* Morse_CodeTests.m */; };
+		0F4AAAB2188DCD16000CFBAE /* NSString+MorseCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4AAAB1188DCD16000CFBAE /* NSString+MorseCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		0F4AAAA2188DCC24000CFBAE /* Morse CodeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Morse CodeTests-Info.plist"; sourceTree = "<group>"; };
 		0F4AAAA4188DCC24000CFBAE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0F4AAAA6188DCC24000CFBAE /* Morse_CodeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Morse_CodeTests.m; sourceTree = "<group>"; };
+		0F4AAAB0188DCD16000CFBAE /* NSString+MorseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MorseCode.h"; sourceTree = "<group>"; };
+		0F4AAAB1188DCD16000CFBAE /* NSString+MorseCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MorseCode.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,7 @@
 		0F4AAA6F188DCC24000CFBAE = {
 			isa = PBXGroup;
 			children = (
+				0F4AAAB3188DCD1B000CFBAE /* Categories */,
 				0F4AAA81188DCC24000CFBAE /* Morse Code */,
 				0F4AAAA0188DCC24000CFBAE /* Morse CodeTests */,
 				0F4AAA7A188DCC24000CFBAE /* Frameworks */,
@@ -115,8 +119,7 @@
 				0F4AAA8A188DCC24000CFBAE /* RPLAppDelegate.h */,
 				0F4AAA8B188DCC24000CFBAE /* RPLAppDelegate.m */,
 				0F4AAA8D188DCC24000CFBAE /* Main.storyboard */,
-				0F4AAA90188DCC24000CFBAE /* RPLViewController.h */,
-				0F4AAA91188DCC24000CFBAE /* RPLViewController.m */,
+				0F4AAAB4188DCD2B000CFBAE /* View Controllers */,
 				0F4AAA93188DCC24000CFBAE /* Images.xcassets */,
 				0F4AAA82188DCC24000CFBAE /* Supporting Files */,
 			);
@@ -150,6 +153,24 @@
 				0F4AAAA3188DCC24000CFBAE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F4AAAB3188DCD1B000CFBAE /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0F4AAAB0188DCD16000CFBAE /* NSString+MorseCode.h */,
+				0F4AAAB1188DCD16000CFBAE /* NSString+MorseCode.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		0F4AAAB4188DCD2B000CFBAE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0F4AAA90188DCC24000CFBAE /* RPLViewController.h */,
+				0F4AAA91188DCC24000CFBAE /* RPLViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +274,7 @@
 				0F4AAA88188DCC24000CFBAE /* main.m in Sources */,
 				0F4AAA8C188DCC24000CFBAE /* RPLAppDelegate.m in Sources */,
 				0F4AAA92188DCC24000CFBAE /* RPLViewController.m in Sources */,
+				0F4AAAB2188DCD16000CFBAE /* NSString+MorseCode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
