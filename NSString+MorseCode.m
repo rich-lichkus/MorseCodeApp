@@ -57,30 +57,40 @@
 }
 
 
-- (NSArray *) symbolsForString
+- (NSMutableArray *) wordSymbolsForMessage
 {
-	NSMutableArray *symbolArray = [NSMutableArray new];
+	NSMutableArray *wordSymbolsForMessage = [NSMutableArray new];       // Array of words as symbols
+    NSMutableArray *symbolsForWord= [NSMutableArray new];               // Array of letter as symbols
     
-    NSString *noSpaceString = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *upperNoSpaceString = [noSpaceString uppercaseString];
+    NSString *upperString = [self uppercaseString];                     // Convert to uppercase - eliminate error and smaller character set
     
-    for(int i=0; i<upperNoSpaceString.length; i++)
+    for(int i=0; i<upperString.length; i++)
 	{
-        NSMutableString *singleCharacter = [NSMutableString stringWithString:[upperNoSpaceString substringWithRange:NSMakeRange(i, 1)]];
-        for(NSString *key in [[NSString morseCodeDictionary] allKeys])
+        NSMutableString *singleCharacter = [NSMutableString stringWithString:[upperString substringWithRange:NSMakeRange(i, 1)]];   // Get single character
+        if([singleCharacter isEqualToString:@" "] && symbolsForWord.count > 0)                          // if, Space
         {
-            if([singleCharacter isEqualToString:key])
+            [wordSymbolsForMessage addObject: symbolsForWord];                                          // then, add word to array of words
+            symbolsForWord = [NSMutableArray new];                                                      // create new array
+        }
+        else
+        {
+            for(NSString *key in [[NSString morseCodeDictionary] allKeys])                              // for each key
             {
-                [symbolArray addObject: [NSString symbolForLetter:singleCharacter]];
+                if([singleCharacter isEqualToString:key])                                               // if 
+                {
+                    [symbolsForWord addObject: [NSString symbolForLetter:singleCharacter]];
+                }
             }
         }
     }
-    return symbolArray;
+    
+    [wordSymbolsForMessage addObject: symbolsForWord];
+    return wordSymbolsForMessage;
 }
                               
 + (NSString *)symbolForLetter:(NSString *)letter
 {
-    NSLog(@"%@",letter);
+    //NSLog(@"%@",letter);
     return [[NSString morseCodeDictionary] objectForKey:letter];
 }
 

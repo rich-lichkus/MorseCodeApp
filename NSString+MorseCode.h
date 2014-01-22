@@ -10,7 +10,7 @@
 
 @interface NSString (MorseCode)
 
-- (NSArray *) symbolsForString;
+- (NSMutableArray *) wordSymbolsForMessage;
 + (NSString *)symbolForLetter:(NSString *)letter;
 + (NSDictionary *) morseCodeDictionary;
 @end
