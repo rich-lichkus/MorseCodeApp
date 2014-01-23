@@ -10,9 +10,16 @@
 
 
 @interface RPLViewController ()
+
 @property (nonatomic, getter = isFlashOn) BOOL flashOn;
 @property (weak, nonatomic) IBOutlet UITextView *txtBxMessage;
 - (IBAction)pressedSend:(id)sender;
+@property (strong, nonatomic) RPLTorchController *torchController;
+@property (weak, nonatomic) IBOutlet UILabel *lblLetter;
+@property (weak, nonatomic) IBOutlet UILabel *lblMorse;
+//@property (strong, nonatomic) MBProgressHUD *progress;
+
+
 @end
 
 @implementation RPLViewController
@@ -20,6 +27,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.torchController = [RPLTorchController new];
+    self.torchController.delegate = self;
+    
+    
+   //self.progress = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //[self.view addSubview:self.progress];
+    //[self.progress setHidden:YES];
+    
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -33,52 +49,36 @@
 
 - (IBAction)pressedSend:(id)sender
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSOperationQueue *flashQueue = [NSOperationQueue new];
     [flashQueue setMaxConcurrentOperationCount:1];
     
     NSBlockOperation *flashSymbols = [NSBlockOperation blockOperationWithBlock:^{
-    
-        NSMutableArray *allSymbols = [NSMutableArray new];
-        if(self.txtBxMessage.text.length >0)
-        {
-            allSymbols = self.txtBxMessage.text ? [self.txtBxMessage.text wordSymbolsForMessage] : [NSMutableArray arrayWithObject:@"String Was Nil"];
-        }
-        
-        AVCaptureDevice *torch = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        [torch lockForConfiguration:nil];
-       
-        for(NSMutableArray *word in allSymbols)
-        {
-            for(NSString *symbolSet in word)
-            {
-                for(int i=0; i<symbolSet.length; i++)
-                {
-                    NSInteger currentBit = [[NSString stringWithString:[symbolSet substringWithRange: NSMakeRange(i, 1)]] integerValue];
-                    unsigned sleepTime = 0;
-                    switch(currentBit)
-                    {
-                        case 0:
-                            sleepTime = 100000;
-                            break;
-                        case 1:
-                            sleepTime = 300000;
-                            break;
-                    }
-                    [torch setTorchMode:AVCaptureTorchModeOn];
-                    [torch setFlashMode:AVCaptureFlashModeOn];
-                    usleep(sleepTime);  // Duration Light is on, based on symbol
-                    [torch setTorchMode:AVCaptureTorchModeOff];
-                    [torch setFlashMode:AVCaptureFlashModeOff];
-                    usleep(100000);     // Duration between symbols
-                }
-            }
-            usleep(500000);
-        }
-        [torch unlockForConfiguration];
+        NSMutableArray *allSymbols = [NSMutableArray arrayWithArray:[self.torchController getMorseSymbolArrayForMessage: self.txtBxMessage.text]];
+        [self.torchController morseFlashSymbolArray:allSymbols];
     }];
-    
+
+
     [flashQueue addOperation:flashSymbols];
+}
+
+
+#pragma mark - Flash Delegate
+
+- (void) willFlashSymbol: (NSString *)symbol
+{
+    self.lblMorse.text = symbol;
     
 }
+
+-(void) willFlashLetter: (NSArray *)letterArray
+{
+    self.lblLetter.text = letterArray[0];
+}
+
+- (void) willFinishSending{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
 
 @end

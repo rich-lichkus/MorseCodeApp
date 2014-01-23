@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "NSString+MorseCode.h"
 #import <AVFoundation/AVFoundation.h>
+#import "RPLTorchController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-@interface RPLViewController : UIViewController
+
+@interface RPLViewController : UIViewController <printFlashDelegate>
 
 @end
