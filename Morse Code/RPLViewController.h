@@ -13,6 +13,6 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 
 
-@interface RPLViewController : UIViewController <printFlashDelegate>
+@interface RPLViewController : UIViewController <printFlashDelegate, UITextViewDelegate>
 
 @end
